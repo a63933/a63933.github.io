@@ -38,18 +38,22 @@
   box-sizing: border-box;
   border: 1px solid #f00;
   transition: all 0.8s ease-in-out;
+  transform: translate3d(0, 0, 0);
   position: absolute;
   top: 0;
   left: 0;
 }
 #contentList>div.contentLi.above{
-  top: -100vh;
+  /* top: -100vh; */
+  transform: translate3d(0, -100vh, 0);
 }
 #contentList>div.contentLi.current{
-  top: 0;
+  /* top: 0; */
+  transform: translate3d(0, 0, 0);
 }
 #contentList>div.contentLi.below{
-  top: 100vh;
+  /* top: 100vh; */
+  transform: translate3d(0, 100vh, 0);
 }
 #contentList>div.contentLi:nth-child(9n+1){
   background-color: #CD6600;
