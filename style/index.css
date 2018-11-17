@@ -22,6 +22,10 @@
   animation-play-state: paused;
   border-radius: 50%;
 }
+#music  video {
+  width: 400px;
+  height: 300px;
+}
 #contentList{
   position: absolute;
   left: 0; top: 0;
@@ -38,7 +42,7 @@
   height: 100%;
   box-sizing: border-box;
   border: 1px solid #f00;
-  transition: all 0.8s ease-in-out;
+  transition: all 0.5s ease-in-out;
   transform: translate3d(0, 0, 0);
   position: absolute;
   top: 0;
@@ -87,7 +91,7 @@
   width: 12px;
   min-height: 10px;
   position: fixed;
-  top: 30%; right: 70px;
+  top: 40%; right: 70px;
   background-color: rgba(0, 0, 0, 0.3);
   padding: 7px 5px;
   border-radius: 8px;

@@ -60,13 +60,11 @@ ready(()=>{
     oNav.appendChild(oNode);
   });
   oList.addEventListener('mousewheel', (event) => {
-    if(isChanging){
-      return false;
-    }
+    if(isChanging){return false;}
     isChanging=true;
     setTimeout(()=>{
       isChanging = false;
-    }, 360);
+    }, 500);
     if(event.wheelDelta < 0){
       oIndex += 1;
       if(oIndex >= aLi.length){
