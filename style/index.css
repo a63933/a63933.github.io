@@ -19,6 +19,7 @@
 #img1{
   width: 50px;height: 50px;
   animation: turn 10s infinite linear;
+  animation-play-state: paused;
   border-radius: 50%;
 }
 #contentList{
@@ -81,4 +82,30 @@
 }
 #contentList>div.contentLi:nth-child(9n){
   background-color: #00EE00;
+}
+#nav{
+  width: 12px;
+  min-height: 10px;
+  position: fixed;
+  top: 30%; right: 70px;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 7px 5px;
+  border-radius: 8px;
+}
+#nav .nav{
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  transition: all .3s linear;
+  background: transparent;
+}
+#nav .nav:last-child{
+  margin-bottom: 0;
+}
+#nav .nav.current{
+  background-color: #fff;
+  height: 24px;
 }

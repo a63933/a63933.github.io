@@ -29,6 +29,9 @@ ready(()=>{
   oAudio.addEventListener('canplay', (event)=>{
     console.log('music is ready to play!');
   }, false);
+  oAudio.addEventListener('canplaythrough', (event)=>{
+    console.log('music is ready to play without bug!');
+  }, false);
   oAudio.addEventListener('ended', ()=>{
     let oIndex = Math.floor(Math.random() * oList.length);
     console.log(oIndex);
@@ -45,7 +48,25 @@ ready(()=>{
   let oList = document.querySelector("#contentList");
   let oIndex = 0;
   let aLi = document.querySelectorAll("#contentList > .contentLi");
+  let oNav = document.querySelector("#nav");
+  let isChanging = false;
+  aLi.forEach((item, index)=>{
+    let oNode = document.createElement('div');
+    if(index === 0){
+      oNode.setAttribute('class', 'nav current');
+    }else{
+      oNode.setAttribute('class', 'nav');
+    }
+    oNav.appendChild(oNode);
+  });
   oList.addEventListener('mousewheel', (event) => {
+    if(isChanging){
+      return false;
+    }
+    isChanging=true;
+    setTimeout(()=>{
+      isChanging = false;
+    }, 360);
     if(event.wheelDelta < 0){
       oIndex += 1;
       if(oIndex >= aLi.length){
@@ -65,6 +86,7 @@ ready(()=>{
       item.removeClass('current');
       item.removeClass('above');
       item.removeClass('below');
+      oNav.children[index].removeClass('current')
       if(index < oIndex){
         item.addClass('above');
       }
@@ -73,5 +95,6 @@ ready(()=>{
       }
     });
     aLi[oIndex].addClass('current');
+    oNav.children[oIndex].addClass('current');
   }, false);
 });
