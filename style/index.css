@@ -61,7 +61,7 @@
   transform: translate3d(0, 100vh, 0);
 }
 #contentList>div.contentLi:nth-child(9n+1){
-  background-color: #CD6600;
+  background-color: #BCEE68;
 }
 #contentList>div.contentLi:nth-child(9n+2){
   background-color: #20B2AA;
