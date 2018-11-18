@@ -95,4 +95,7 @@ ready(()=>{
     aLi[oIndex].addClass('current');
     oNav.children[oIndex].addClass('current');
   }, false);
+  document.addEventListener('keypress', (event)=>{
+    console.log(event);
+  });
 });
