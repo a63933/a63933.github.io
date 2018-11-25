@@ -25,7 +25,7 @@ ready(()=>{
   //音乐组件
   let oAudio = document.querySelector('#audio1');
   let oP = document.querySelector('#p1');
-  let oList = ['a', 'b', 'c', 'd'];
+  let oList = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
   oAudio.addEventListener('canplay', (event)=>{
     console.log('music is ready to play!');
   }, false);
