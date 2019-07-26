@@ -27,7 +27,7 @@
 ### 代码
 `let a = 12;`
 
-```
+```javascript
   function abc(){
     console.log('dai')
   }
