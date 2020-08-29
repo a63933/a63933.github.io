@@ -3,16 +3,20 @@ function ready (fn) {
 }
 
 function ajax(url){
-  let oAjax = new XMLHttpRequest();
-  oAjax.open('get', url, true)
-  oAjax.send(null)
-  oAjax.onreadystatechange = function(){
-    if(oAjax.readyState === 4){
-      if(oAjax.status >= 200 || oAjax.status === 304){
-        return oAjax.responseText
+  return new Promise((resolve, reject) => {
+    let oAjax = new XMLHttpRequest();
+    oAjax.open('get', url, true)
+    oAjax.send(null)
+    oAjax.onreadystatechange = function(){
+      if(oAjax.readyState === 4){
+        if(oAjax.status >= 200 || oAjax.status === 304){
+          resolve(oAjax.responseText)
+        }else{
+          reject(`错误代码：${oAjax.status}`)
+        }
       }
     }
-  }
+  })
 }
 
 Object.prototype.addClass = function(clsn){
@@ -36,33 +40,57 @@ Object.prototype.removeClass = function(clsn){
   this.className = aCls.join(' ');
 }
 
-ready(() => {
-  //音乐组件
-  let oAudio = document.querySelector('#audio1');
-  let oP = document.querySelector('#p1');
-  let oList = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
-  oAudio.addEventListener('canplay', (event) => {
-    console.log('music is ready to play!');
-  }, false);
-  oAudio.addEventListener('canplaythrough', (event) => {
-    console.log('music is ready to play without bug!');
-  }, false);
-  oAudio.addEventListener('ended', () => {
-    let oIndex = Math.floor(Math.random() * oList.length);
-    oAudio.src=`music/${oList[oIndex]}.mp3`;
-  });
-  oAudio.addEventListener('timeupdate', (event) => {
-    oP.innerText = `${Math.floor(oAudio.currentTime)}s, 播放百分比： ${Math.ceil(oAudio.currentTime/oAudio.duration*100)}%`;
-  });
-});
+function debounce(fn, delay=300) {
+  let timer;
+  return function(...args){
+    if(timer){
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+    }, delay)
+  }
+}
 
-ready(() => {
+function throttle(fn, delay=500) {
+  let timer;
+  return function(...args){
+    if(timer){
+      return false
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, args)
+      timer = null
+    }, delay)
+  }
+}
+
+async function giveItem(aLi) {
+  let oData = await ajax('./navlistdata/nav.json')
+  oData = JSON.parse(oData)
+  aLi.forEach((item, index) => {
+    const tempList = oData[`0${index+1}`]
+    let aNode = document.createElement('div')
+    aNode.setAttribute('class', 'content')
+    if(tempList){
+      tempList.forEach(itemIn => {
+        let oNode = document.createElement('div')
+        oNode.innerHTML = itemIn.name
+        aNode.appendChild(oNode)
+      })
+    }
+    item.appendChild(aNode)
+  })
+}
+
+ready(async () => {
   //滚动列表
+  let keypressString = ""
   let oList = document.querySelector("#contentList");
   let oIndex = 0;
   let aLi = document.querySelectorAll("#contentList > .contentLi");
   let oNav = document.querySelector("#nav");
-  let isChanging = false;
+  await giveItem(aLi)
   aLi.forEach((item, index) => {
     let oNode = document.createElement('div');
     if(index === 0){
@@ -70,12 +98,13 @@ ready(() => {
     } else {
       oNode.setAttribute('class', 'nav');
     }
-    oNode.addEventListener('mouseenter', () => {
+    oNode.addEventListener('mouseenter', debounce(function(){
       turnToPage(index)
-    }, false)
+    }), false)
     oNav.appendChild(oNode);
   });
-  function turnToPage(num){
+
+  function turnToPage(num) {
     oIndex = num
     aLi.forEach((item, index) => {
       item.removeClass('current');
@@ -92,19 +121,15 @@ ready(() => {
     aLi[oIndex].addClass('current');
     oNav.children[oIndex].addClass('current');
   }
-  oList.addEventListener('mousewheel', (event) => {
-    if (isChanging) {return false;}
-    isChanging = true;
-    setTimeout(() => {
-      isChanging = false;
-    }, 500);
-    if(event.wheelDelta < 0){
+
+  oList.addEventListener('mousewheel', throttle(function(event){
+    if(event.wheelDelta < 0) {
       oIndex += 1;
       if(oIndex >= aLi.length){
         oIndex = aLi.length - 1;
         return false;
       }
-    } else if (event.wheelDelta > 0){
+    } else if (event.wheelDelta > 0) {
       oIndex -= 1;
       if(oIndex < 0){
         oIndex = 0;
@@ -114,8 +139,16 @@ ready(() => {
       return false;
     }
     turnToPage(oIndex)
-  }, false);
-  document.addEventListener('keypress', (event)=>{
-    console.log(event);
+  }), false);
+  document.addEventListener('keypress', (event) => {
+    keypressString += event.key
+    const maxLength = 5
+    if(keypressString.length > maxLength){
+      keypressString = keypressString.substr(-maxLength)
+    }
+    console.log(keypressString)
+    if(keypressString === '63933'){
+      location.href = './resume/cv.html'
+    }
   });
 });

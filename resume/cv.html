@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>李政毅简历</title>
+  <script type="text/javascript">
+    const lookPass = '63933'
+    let pass = ''
+    let historyPass = sessionStorage.getItem('pass')
+    if(!historyPass || historyPass !== '63933'){
+      pass = prompt('请输入密码：')
+    }
+    if(historyPass === '63933' || pass === '63933'){
+      sessionStorage.setItem('pass', pass || historyPass)
+    } else {
+      window.location.reload();
+    }
+  </script>
+</head>
+<body>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste nisi optio, itaque illo quo quae, suscipit voluptate nemo dolore iure obcaecati minus perferendis officiis veritatis ratione nesciunt enim est alias!
+</body>
+</html>

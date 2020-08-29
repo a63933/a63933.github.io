@@ -1,28 +1,13 @@
 *{margin:0;padding: 0;}
-#music{
-  width: 400px;
-  height: 50px;
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  z-index: 100;
-}
-#p1{position: absolute;top: 50px;left: 30px;}
-
-#music  video {
-  width: 400px;
-  height: 300px;
-}
 #contentList{
   position: absolute;
-  left: 0; top: 0;
-  width: 100%;
+  left: 4px; top: 0;
+  width: calc(100% - 4px);
   height: 100%;
   background: #fff;
   box-sizing: border-box;
   overflow: hidden;
   background: #000;
-  padding-right: 4px;
 }
 #contentList > div.contentLi{
   width: 100%;
@@ -31,6 +16,7 @@
   transition: all 0.5s ease-in-out;
   transform: translate3d(0, 0, 0);
   position: absolute;
+  padding: 4px;
   top: 0;
   left: 0;
 }
@@ -44,10 +30,10 @@
   transform: translate3d(0, 100vh, 0);
 }
 #contentList>div.contentLi:nth-child(9n+1){
-  background-color: #BCEE68;
+  background-color: #20B2AA;
 }
 #contentList>div.contentLi:nth-child(9n+2){
-  background-color: #20B2AA;
+  background-color: #BCEE68;
 }
 #contentList>div.contentLi:nth-child(9n+3){
   background-color: #8DB6CD;
@@ -62,7 +48,7 @@
   background-color: #E0FFFF;
 }
 #contentList>div.contentLi:nth-child(9n+7){
-  background-color: #F0F8FF;
+  background-color: rgba(178, 170, 201);
 }
 #contentList>div.contentLi:nth-child(9n+8){
   background-color: #FF6A6A;
@@ -74,7 +60,7 @@
   width: 4px;
   height: 100vh;
   position: fixed;
-  top: 0; right: 0px;
+  top: 0; left: 0px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 2px 0px;
   display: flex;
