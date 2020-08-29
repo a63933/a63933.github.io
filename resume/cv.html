@@ -14,12 +14,105 @@
     }
     if(historyPass === '63933' || pass === '63933'){
       sessionStorage.setItem('pass', pass || historyPass)
+    } else if (pass === null) {
+      window.location.href = window.location.origin + '/index.html'
     } else {
       window.location.reload();
     }
   </script>
+  <style media="screen">
+    *{ margin: 0px; padding: 0px; }
+    .main-center {
+      width: 1000px;
+      border: 1px solid #e1e1e1;
+      margin: 10px auto 0px;
+      box-sizing: border-box;
+      padding: 20px 12px;
+      font-family: '\5FAE\8F6F\96C5\9ED1', sans-serif;
+    }
+    .main-center .cv-title {
+      text-align: center;
+    }
+    .main-center .cv-title p {
+      font-size: 16px;
+      font-weight: 800;
+      color: #222;
+      margin-bottom: 0px;
+    }
+    .main-center .main-squ {
+      margin-top: 12px;
+    }
+    .main-center .main-squ .squ-title {
+      font-size: 14px;
+    }
+    .main-center .main-squ .squ-content {
+      font-size: 14px;
+      text-indent: 20px;
+    }
+  </style>
 </head>
 <body>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste nisi optio, itaque illo quo quae, suscipit voluptate nemo dolore iure obcaecati minus perferendis officiis veritatis ratione nesciunt enim est alias!
+  <div class="main-center" id="cv">
+    <div class="cv-title">
+      <p>个人简历</p>
+    </div>
+    <div class="main-squ">
+      <div class="squ-title">
+        <p>基本信息</p>
+      </div>
+      <div class="squ-content">
+        <p>姓名： 李政毅</p>
+        <p>联系方式： 13739666870   lizhengyi_m@163.com</p>
+      </div>
+    </div>
+    <div class="main-squ">
+      <div class="squ-title">
+        <p>教育经历</p>
+      </div>
+      <div class="squ-content">
+        <p>河北科技师范学院 物理学</p>
+        <p>2010.09 ~ 2014.06</p>
+      </div>
+    </div>
+    <div class="main-squ">
+      <div class="squ-title">
+        <p>个人技能</p>
+      </div>
+      <div class="squ-content">
+        <p>熟练HTML、CSS（HTML5、CSS3）、原生JavaScript(ES5、ES6)，使用Less进行开发；</p>
+        <p>熟练掌握Vue、React框架，能独立编写自定义组件快速进行开发；</p>
+        <p>多次PC端、移动端项目经验，使用Chrome调试工具，解决浏览器适配问题及网站优化；</p>
+        <p>熟练使用nodejs和mysql，配合sql或Graphql语句请求进行后台开发；</p>
+        <p>熟练运用echarts，G2，raphael等进行图表可视化效果展示；</p>
+        <p>熟悉使用gulp、webpack自动化构建工具，熟悉typescript编写；</p>
+        <p>熟练使用gitlab进行多分支代码管理，并利用Jenkins做自动化部署或命令行手动部署；</p>
+        <p>熟悉从搭建项目开始到代码上线的整个团队开发流程； </p>
+      </div>
+      <div class="squ-content">
+        <p>经历描述：</p>
+        <p>1、在公司均担任web前端开发工程师，负责公司网站页面的编写并日常维护；</p>
+        <p>2、能认真根据效果图重构页面各种样式和交互效果；</p>
+        <p>3、参与后台node程序开发，能独立开发前后端分离的网站；</p>
+        <p>4、对网站进行持续维护和代码优化，提高浏览速度；</p>
+        <p>5、工作稳定，为人和善，业余时间拓展业务水平，希望能在前端的路上走的更远。</p>
+      </div>
+    </div>
+    <div class="main-squ">
+      <div class="squ-title">
+        <p>工作经历</p>
+      </div>
+      <div class="squ-content">
+        <p>2018年5月~至今            智联招聘                          网站前端</p>
+        <p>2016年2月~2018年5月    中公网医疗信息技术有限公司        网站前端</p>
+        <p>2015年7月~2016年1月    北京科天科技有限公司              网站前端</p>
+        <p>2013年7月~2015年6月    秦皇岛超越传媒                    网站前端</p>
+      </div>
+    </div>
+    <div class="main-squ">
+      <div class="squ-title">
+        <p>项目经历</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
