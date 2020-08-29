@@ -1,0 +1,31 @@
+{
+  "01": [
+    {
+      "id": "01001",
+      "name": "平滑动画",
+      "title": "动画实现方式",
+      "description": "js动画实现方式种类总结",
+      "color": "#f00",
+      "size": 10,
+      "location": "./projectLib/animation-01/index.html"
+    },
+    {
+      "id": "01002",
+      "name": "数据类型",
+      "title": "数据类型知识点总结",
+      "description": "数据类型知识点总结",
+      "color": "#f00",
+      "size": 10,
+      "location": "./projectLib/datatype-01/index.html"
+    },
+    {
+      "id": "01003",
+      "name": "继承",
+      "title": "js继承",
+      "description": "js继承",
+      "color": "#f00",
+      "size": 10,
+      "location": "./projectLib/inherit-01/index.html"
+    },
+  ]
+}

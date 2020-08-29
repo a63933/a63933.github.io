@@ -1,6 +1,20 @@
 function ready (fn) {
   document.addEventListener('DOMContentLoaded', fn, false);
 }
+
+function ajax(url){
+  let oAjax = new XMLHttpRequest();
+  oAjax.open('get', url, true)
+  oAjax.send(null)
+  oAjax.onreadystatechange = function(){
+    if(oAjax.readyState === 4){
+      if(oAjax.status >= 200 || oAjax.status === 304){
+        return oAjax.responseText
+      }
+    }
+  }
+}
+
 Object.prototype.addClass = function(clsn){
   let aCls = this.className.split(' ');
   aCls.forEach((item)=>{
@@ -11,9 +25,10 @@ Object.prototype.addClass = function(clsn){
   aCls.push(clsn);
   this.className = aCls.join(' ');
 }
+
 Object.prototype.removeClass = function(clsn){
   let aCls = this.className.split(' ');
-  aCls.forEach((item, index)=>{
+  aCls.forEach((item, index) => {
     if(item === clsn){
       aCls.splice(index, 1);
     }
@@ -21,66 +36,48 @@ Object.prototype.removeClass = function(clsn){
   this.className = aCls.join(' ');
 }
 
-ready(()=>{
+ready(() => {
   //音乐组件
   let oAudio = document.querySelector('#audio1');
   let oP = document.querySelector('#p1');
   let oList = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
-  oAudio.addEventListener('canplay', (event)=>{
+  oAudio.addEventListener('canplay', (event) => {
     console.log('music is ready to play!');
   }, false);
-  oAudio.addEventListener('canplaythrough', (event)=>{
+  oAudio.addEventListener('canplaythrough', (event) => {
     console.log('music is ready to play without bug!');
   }, false);
-  oAudio.addEventListener('ended', ()=>{
+  oAudio.addEventListener('ended', () => {
     let oIndex = Math.floor(Math.random() * oList.length);
-    console.log(oIndex);
     oAudio.src=`music/${oList[oIndex]}.mp3`;
   });
-  oAudio.addEventListener('timeupdate', (event)=>{
+  oAudio.addEventListener('timeupdate', (event) => {
     oP.innerText = `${Math.floor(oAudio.currentTime)}s, 播放百分比： ${Math.ceil(oAudio.currentTime/oAudio.duration*100)}%`;
   });
 });
 
-
-ready(()=>{
+ready(() => {
   //滚动列表
   let oList = document.querySelector("#contentList");
   let oIndex = 0;
   let aLi = document.querySelectorAll("#contentList > .contentLi");
   let oNav = document.querySelector("#nav");
   let isChanging = false;
-  aLi.forEach((item, index)=>{
+  aLi.forEach((item, index) => {
     let oNode = document.createElement('div');
     if(index === 0){
       oNode.setAttribute('class', 'nav current');
-    }else{
+    } else {
       oNode.setAttribute('class', 'nav');
     }
+    oNode.addEventListener('mouseenter', () => {
+      turnToPage(index)
+    }, false)
     oNav.appendChild(oNode);
   });
-  oList.addEventListener('mousewheel', (event) => {
-    if(isChanging){return false;}
-    isChanging=true;
-    setTimeout(()=>{
-      isChanging = false;
-    }, 500);
-    if(event.wheelDelta < 0){
-      oIndex += 1;
-      if(oIndex >= aLi.length){
-        oIndex = aLi.length - 1;
-        return false;
-      }
-    }else if(event.wheelDelta > 0){
-      oIndex -= 1;
-      if(oIndex < 0){
-        oIndex = 0;
-        return false;
-      }
-    }else{
-      return false;
-    }
-    aLi.forEach((item, index)=>{
+  function turnToPage(num){
+    oIndex = num
+    aLi.forEach((item, index) => {
       item.removeClass('current');
       item.removeClass('above');
       item.removeClass('below');
@@ -94,6 +91,29 @@ ready(()=>{
     });
     aLi[oIndex].addClass('current');
     oNav.children[oIndex].addClass('current');
+  }
+  oList.addEventListener('mousewheel', (event) => {
+    if (isChanging) {return false;}
+    isChanging = true;
+    setTimeout(() => {
+      isChanging = false;
+    }, 500);
+    if(event.wheelDelta < 0){
+      oIndex += 1;
+      if(oIndex >= aLi.length){
+        oIndex = aLi.length - 1;
+        return false;
+      }
+    } else if (event.wheelDelta > 0){
+      oIndex -= 1;
+      if(oIndex < 0){
+        oIndex = 0;
+        return false;
+      }
+    } else {
+      return false;
+    }
+    turnToPage(oIndex)
   }, false);
   document.addEventListener('keypress', (event)=>{
     console.log(event);
