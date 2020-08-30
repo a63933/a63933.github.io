@@ -75,7 +75,24 @@ async function giveItem(aLi) {
     if(tempList){
       tempList.forEach(itemIn => {
         let oNode = document.createElement('div')
-        oNode.innerHTML = itemIn.name
+        oNode.setAttribute('class', 'squ-li')
+        let oNodeIn = document.createElement('div')
+        oNodeIn.setAttribute('class', 'squ-li-in')
+        if(itemIn.color){
+          oNodeIn.style.border = `1px solid ${itemIn.color}`
+        }
+        oNode.appendChild(oNodeIn)
+        let oImg = document.createElement('img')
+        oImg.setAttribute('class', 'bgImg')
+        oNodeIn.appendChild(oImg)
+        let oP = document.createElement('p')
+        oP.innerHTML = itemIn.name
+        oP.title = itemIn.title
+        oP.setAttribute('class', 'squTitle')
+        oNodeIn.appendChild(oP)
+        oNodeIn.addEventListener('click', () => {
+          location.href = itemIn.location
+        }, false)
         aNode.appendChild(oNode)
       })
     }

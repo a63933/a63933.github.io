@@ -1,0 +1,15 @@
+@keyframes springs {
+  0% { width: 100px; }
+  100% { width: 500px; }
+}
+#animation .animationSqu{
+  height: 80px;
+  background: lightpink;
+  animation: springs 2s alternate infinite;
+  animation-timing-function: linear;
+}
+#animation .animationSquJs{
+  height: 80px;
+  width: 100px;
+  background: lightpink;
+}

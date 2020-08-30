@@ -5,8 +5,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>动画</title>
+  <link rel="stylesheet" href="../../style/every.css">
+  <link rel="stylesheet" href="./index.css">
 </head>
 <body>
+  <div class="container">
+    <h2 class="page-title">关于动画的实现及流畅性总结</h2>
+    <h3>一、首先来一个让页面假装卡住的函数</h3>
+    <pre class="code-area">
+      <code>
+        function gotNum(num){
+          if(num <= 2) {
+            return num
+          }
+          return gotNum(num - 1) + gotNum(num - 2)
+        }
+        gotNum(43);
+        //大约卡住3s，实际时间取决于电脑计算性能， 卡住的原因是js的单线程特点，未执行完当前任务队列的情况下，不会进行GUI渲染
+      </code>
+    </pre>
+    <div class="example" id="pretend">
+      <p class="example-title">样例：</p>
+      <input type="button" name="" id="pretendBtn" value="点击卡住页面">
+      <input type="text" name="" id="pretendTxt" value="" placeholder="请输入">
+      <p class="example-status" id="pretendStatus"></p>
+      <p class="example-text">一个普通的输入框，在点击按钮卡住页面按钮时，输入框将无法使用</p>
+    </div>
+    <h3>二、现在来几种实现动画的方式</h3>
+    <pre class="code-area">
+      <code>
+        // css animation实现方式
+        @keyframes springs {
+          0% { width: 100px; }
+          100% { width: 500px; }
+        }
+        .animationSqu{
+          height: 80px;
+          background: lightpink;
+          animation: springs 2s alternate infinite;
+          animation-timing-function: linear;
+        }
 
+        // interval方式
+        let animationInterval = document.getElementById('animation-interval');
+        let intervalDelta = 4;
+        let intervalTimer = setInterval(() => {
+          const curWidth = parseInt(getComputedStyle(animationInterval, false).width)
+          if(curWidth >= 500){
+            intervalDelta = -Math.abs(intervalDelta);
+          }else if(curWidth <= 100){
+            intervalDelta = Math.abs(intervalDelta);
+          }
+          animationInterval.style.width = curWidth + intervalDelta + 'px'
+        }, 20)
+
+        // timeout方式
+        let animationTimeout = document.getElementById('animation-timeout');
+        let timeoutDelta = 4;
+        let timeoutTimer = null;
+        function timeoutAnimation(){
+          const curWidth = parseInt(getComputedStyle(animationTimeout, false).width)
+          if(curWidth >= 500){
+            timeoutDelta = -Math.abs(timeoutDelta);
+          }else if(curWidth <= 100){
+            timeoutDelta = Math.abs(timeoutDelta);
+          }
+          animationTimeout.style.width = curWidth + timeoutDelta + 'px'
+          timeoutTimer = setTimeout(() => {
+            timeoutAnimation()
+          }, 20)
+        }
+        timeoutAnimation()
+        // animationFrame方式
+        let animationAnimationFrame = document.getElementById('animation-animationframe');
+        let animationFrameDelta = 3.3;
+        function animationFrameAnimation(){
+          const curWidth = parseFloat(getComputedStyle(animationAnimationFrame, false).width)
+          if(curWidth >= 500){
+            animationFrameDelta = -Math.abs(animationFrameDelta);
+          }else if(curWidth <= 100){
+            animationFrameDelta = Math.abs(animationFrameDelta);
+          }
+          animationAnimationFrame.style.width = curWidth + animationFrameDelta + 'px'
+          requestAnimationFrame(animationFrameAnimation)
+        }
+        requestAnimationFrame(animationFrameAnimation)
+      </code>
+    </pre>
+    <div class="example" id="animation">
+      <p class="example-title">CSS实现方式：</p>
+      <div class="animationSqu"></div>
+      <p class="example-status" id="animation-css-status"></p>
+      <p class="example-title">setInterval实现方式：</p>
+      <div class="animationSquJs" id="animation-interval"></div>
+      <p class="example-status" id="animation-interval-status"></p>
+      <p class="example-title">setTimeout实现方式：</p>
+      <div class="animationSquJs" id="animation-timeout"></div>
+      <p class="example-status" id="animation-timeout-status"></p>
+      <p class="example-title">requestAnimationFrame实现方式：</p>
+      <div class="animationSquJs" id="animation-animationframe"></div>
+      <p class="example-status" id="animation-animationframe-status"></p>
+      <input type="button" name="" id="animationDie" value="点击卡住页面">
+    </div>
+  </div>
 </body>
+<script src="./index.js" charset="utf-8"></script>
 </html>

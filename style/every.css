@@ -1,0 +1,38 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.container{
+  width: 1200px;
+  margin: 10px auto 0px;
+}
+.page-title{
+  margin-bottom: 12px;
+  text-align: center;
+  margin-top: 20px;
+}
+.code-area {
+  margin: 12px 0px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  border-radius: 4px;
+}
+.example {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 10px;
+  border: 1px solid #e1e1e1;
+  margin: 12px 0px;
+}
+.example .example-title{
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+.example .example-text, .example .example-status {
+  font-size: 12px;
+  text-indent: 24px;
+  margin: 12px 0px;
+}
+.example .example-status {
+  color: red;
+}
