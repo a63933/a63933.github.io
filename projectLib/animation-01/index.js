@@ -14,7 +14,7 @@ pretendBtn.addEventListener('click', () => {
   setTimeout(() => {
     console.log(gotNum(43))
     pretendStatus.innerHTML = ''
-  }, 0)
+  }, 20)
 }, false)
 
 // 动画实现方式
