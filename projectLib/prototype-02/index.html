@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>prototype</title>
+  <link rel="stylesheet" href="../../style/every.css">
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <div class="container">
+    <pre class="code-area">
+      <code>
+        function Worker(name) {
+          this.name = name
+        }
+        Worker.prototype.x = 12
+        let oW1 = new Worker('张三')
+        Worker.prototype = {x: 20, y: 30}
+        let oW2 = new Worker('李四')
+        console.log(oW1)
+        console.log(oW2)
+        console.log(oW1.x)
+        console.log(oW1.y)
+        console.log(oW2.x)
+        console.log(oW2.y)
+      </code>
+    </pre>
+  <div class="container">
+</body>
+</html>

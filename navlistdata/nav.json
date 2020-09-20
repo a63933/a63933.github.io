@@ -20,12 +20,32 @@
     },
     {
       "id": "01003",
-      "name": "继承",
-      "title": "js继承",
-      "description": "js继承",
+      "name": "",
+      "title": "",
+      "description": "",
       "color": "#f00",
       "size": 10,
-      "location": "./projectLib/inherit-01/index.html"
+      "location": ""
+    },
+    {
+      "id": "01004",
+      "name": "指南针",
+      "title": "指南针",
+      "description": "指南针",
+      "color": "#f00",
+      "size": 10,
+      "location": "./projectLib/pointSouth-01/index.html"
+    }
+  ],
+  "02": [
+    {
+      "id": "02004",
+      "name": "prototype",
+      "title": "prototype",
+      "description": "prototype",
+      "color": "#f00",
+      "size": 10,
+      "location": "./projectLib/prototype-02/index.html"
     }
   ]
 }
